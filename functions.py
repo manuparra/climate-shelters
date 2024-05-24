@@ -63,7 +63,7 @@ def detect_asphalt(image_path):
 
     # Mostrar el porcentaje
     print("Porcentaje de área de carretera: {:.2f}%".format(street_percentage))
-  return street_image, street_percentage
+    return street_image, street_percentage
 
 
 def detect_vegetation(image_path):
