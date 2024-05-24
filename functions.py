@@ -32,15 +32,15 @@ def detect_shadows(image_path):
 
     return result, shadow_mask, shadow_percentage
 
-def detect_asphalt(image_path):    
+def detect_streets(image_path,r1,r2):
     image = cv2.imread(image_path)
 
     # Convertir la imagen a espacio de color HSV
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     # Definir rangos de colores para detectar carreteras (podrías ajustarlos según tu imagen)
-    lower_color = np.array([85, 85, 125])
-    upper_color = np.array([215, 215, 215])
+    lower_color = np.array(r1)
+    upper_color = np.array(r2)
 
     # Aplicar la máscara para detectar las áreas de carretera
     mask = cv2.inRange(hsv, lower_color, upper_color)
@@ -62,9 +62,8 @@ def detect_asphalt(image_path):
     street_percentage = (street_pixels / total_pixels) * 100
 
     # Mostrar el porcentaje
-    print("Porcentaje de área de carretera: {:.2f}%".format(street_percentage))
-    return street_image, street_percentage
-
+    return street_image,street_percentage
+    
 
 def detect_vegetation(image_path):
     # Cargar la imagen
@@ -100,10 +99,5 @@ def detect_vegetation(image_path):
     result_image = cv2.addWeighted(original_image, 1, vegetation_mask, 0.5, 0)
 
     # Mostrar la imagen resultante con áreas de vegetación resaltadas
-    cv2_imshow(result_image)
-
-    print("Número de árboles detectados: {}".format(num_trees))
-    print("Porcentaje de área de vegetación: {:.2f}%".format(vegetation_percentage))
-
     return result_image, num_trees,vegetation_percentage
 
