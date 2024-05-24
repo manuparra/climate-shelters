@@ -32,7 +32,7 @@ def detect_shadows(image_path):
 
     return result, shadow_mask, shadow_percentage
 
-def detect_streets(image_path,r1,r2):
+def detect_asphalt(image_path,r1,r2):
     image = cv2.imread(image_path)
 
     # Convertir la imagen a espacio de color HSV
